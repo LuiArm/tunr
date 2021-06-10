@@ -26,7 +26,7 @@ const getSongs = () => {
   .then((response) => response.json())
   .then((data) =>{
     console.log('data',data)
-    setSongs(data)
+    setSongs(data.body)
   })
   
 }
@@ -50,7 +50,7 @@ const handleCreate = (newSong) => {
 
 // handleUpdate/"PUT"/updates the song 
 const handleUpdate = (updateSong) => {
-  fetch(url + "/tunr/" + updateSong._id,{
+  fetch(url + "/tunr/" + updateSong.TunrId,{
     method: "PUT", 
     headers: {
       "Content-Type": "application/json"
@@ -67,16 +67,19 @@ const selectSong = (song) => {
 
 
 const deleteSong = (song) => {
-  fetch(url + "/tunr/" + song._id, {
+  fetch(url + "/tunr/" + song.TunrId, {
     method: "delete"
   })
   .then(() => getSongs())
 }
   return (
     <div className="App">
-      <h1>TUNR.</h1>
-      <h3>FOR ALL YOUR PLAYLIST NEEDS</h3>
+      <h1 id="m-header">TUNR.</h1>
+      <h3 id="m-second-header">FOR ALL YOUR PLAYLIST NEEDS</h3>
       <hr />
+      <Link to='/create'>
+        <button>Add Song</button>
+        </Link>
       <main>
         <Switch>
           <Route exact path="/" render={(routerProps) => <Display

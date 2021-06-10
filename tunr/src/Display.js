@@ -1,38 +1,27 @@
 import React from "react"
 
-// title 
-// artist
-// time
 
 const Display = (props) => {
 
     const {songs} = props
-    // const songs = props.songs
+    
     console.log('songs',songs)
 
     const loaded = () => (
         <div className="container">
-            <h1>Playlist 1</h1>
-            {songs.body.map( (item, index) => (
-                <article
-                    key={item._id}>
+            <h1>Favorite Songs</h1>
+            {songs.map( (item, index) => (
+                <article id="display-contatiner"
+                    key={item.TunrId}>
                     <h3>Title: {item.Title}</h3>
                     <h3>Artist: {item.Artist}</h3>
                     <h3>Song Length: {item.Time}</h3>
-                    
-                    <button
-                        onClick={ () => {
-                            props.selectSong(item)
-                            props.history.push('/create')
-                        }}
-                    >Add new song
-                    </button>
                     <button
                         onClick={ () => {
                             props.selectSong(item)
                             props.history.push('/edit')
                         }}
-                    >Edit new song
+                    >Edit
                     </button>
                     <button
                         onClick={ () => {
@@ -40,8 +29,6 @@ const Display = (props) => {
                         }}>
                         Delete
                     </button>
-
-
 
                 </article>
             ))}
@@ -55,7 +42,7 @@ const Display = (props) => {
 
 
 
-    return songs.body.length > 0 ? loaded() : loading()
+    return songs.length > 0 ? loaded() : loading()
    
 }
  
